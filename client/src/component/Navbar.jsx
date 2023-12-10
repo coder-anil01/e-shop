@@ -43,6 +43,7 @@ const Navbar = () => {
               <div onClick={handleLogout} className='navbar-item' style={{cursor:"pointer"}}>
                 Logout
             </div></>)}
+            <NavLink to='/dashbord' className='navbar-item'>🙎🏽</NavLink>
         </div>
       </div>
       <div className='navbar-buttom'></div>

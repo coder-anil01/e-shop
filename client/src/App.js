@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from './pages/Register';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage';
+import UserRoute from './routes/UserRoute';
+import Dashbord from './userDashbord/Dashbord';
 
 function App() {
   return (
@@ -17,6 +19,11 @@ function App() {
       <Route path="/" element={<HomePage />}/>
       <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />}/>
+
+      <Route path="/dashbord" element={<UserRoute/>}>
+        <Route path="" element={<Dashbord/>}/>
+      </Route>
+
       </Routes>
     </Router>
     </>
