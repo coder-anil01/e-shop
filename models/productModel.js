@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema(
         },
         category:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'caregory',
+            ref: 'category',
             require: true,
         },
         price:{
@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
         },
         isFeatured:{
             type: String,
-            default: Male ,Female
+            default: "Male ,Female"
         },
     },{timestamps: true}
 )
