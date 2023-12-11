@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import UserRoute from './routes/UserRoute';
 import Dashbord from './userDashbord/Dashbord';
 import ForgotPassword from './pages/ForgotPassword';
+import AdminRoute from './routes/AdminRoutes';
+import AdminDashbord from './pages/admin/AdminDashbord';
 
 function App() {
   return (
@@ -23,7 +25,11 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />}/>
 
       <Route path="/dashbord" element={<UserRoute/>}>
-        <Route path="" element={<Dashbord/>}/>
+        <Route path="user" element={<Dashbord/>}/>
+      </Route>
+
+      <Route path="/dashbord" element={<AdminRoute/>}>
+        <Route path="admin" element={<AdminDashbord/>}/>
       </Route>
 
       </Routes>

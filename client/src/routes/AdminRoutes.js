@@ -4,14 +4,15 @@ import axios from 'axios';
 import { Outlet } from 'react-router-dom';
 import Spiner from '../component/spiner/Spiner';
 
-export default function UserRoute(){
+export default function AdminRoute(){
 
 const [ok, setOk] = useState(false )
   const [auth, setAuth]= useAuth()
 
   useEffect(()=>{
     const authCheck = async() =>{
-      const res = await axios.get(`http://localhost:8000/api/v1/auth/user-auth`);
+      const res = await axios.get(`http://localhost:8000/api/v1/auth/admin-auth`);
+      console.log(res)
       if(res.data.ok){
         setOk(true)
       }else{
@@ -22,5 +23,5 @@ const [ok, setOk] = useState(false )
   }, [auth?.token]);
   console.log(ok)
 
-  return ok ? <Outlet/> : <Spiner/>
+  return ok ? <Outlet/> : <Spiner path=''/>
 }

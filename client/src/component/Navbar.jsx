@@ -43,7 +43,7 @@ const Navbar = () => {
               <div onClick={handleLogout} className='navbar-item' style={{cursor:"pointer"}}>
                 Logout
             </div></>)}
-            <NavLink to='/dashbord' className='navbar-item'>🙎🏽</NavLink>
+            <NavLink to={`/dashbord/${auth?.user?.role === 1 ? "admin" : "user"}`} className='navbar-item'>{auth?.user?.name}</NavLink>
         </div>
       </div>
       <div className='navbar-buttom'></div>
