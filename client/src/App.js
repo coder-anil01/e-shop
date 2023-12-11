@@ -15,6 +15,11 @@ import MyOrder from './userDashbord/MyOrder';
 import MyWishlist from './userDashbord/MyWishlist';
 import MyCart from './userDashbord/MyCart';
 import MyAccount from './userDashbord/MyAccount';
+import AdminAccount from './pages/admin/AdminAccount';
+import AllOrders from './pages/admin/AllOrders';
+import AllUsers from './pages/admin/AllUsers';
+import Category from './pages/admin/Category';
+import Products from './pages/admin/Products';
 
 function App() {
   return (
@@ -37,7 +42,12 @@ function App() {
       </Route>
 
       <Route path="/dashbord" element={<AdminRoute/>}>
-        <Route path="admin" element={<AdminDashbord/>}/>
+        <Route path="/dashbord/admin/" element={<AdminDashbord/>}/>
+        <Route path="/dashbord/admin/profile" element={<AdminAccount/>}/>
+        <Route path="/dashbord/admin/orders" element={<AllOrders/>}/>
+        <Route path="/dashbord/admin/users" element={<AllUsers/>}/>
+        <Route path="/dashbord/admin/category" element={<Category/>}/>
+        <Route path="/dashbord/admin/products" element={<Products/>}/>
       </Route>
 
       </Routes>
