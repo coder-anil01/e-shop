@@ -11,6 +11,10 @@ import Dashbord from './userDashbord/Dashbord';
 import ForgotPassword from './pages/ForgotPassword';
 import AdminRoute from './routes/AdminRoutes';
 import AdminDashbord from './pages/admin/AdminDashbord';
+import MyOrder from './userDashbord/MyOrder';
+import MyWishlist from './userDashbord/MyWishlist';
+import MyCart from './userDashbord/MyCart';
+import MyAccount from './userDashbord/MyAccount';
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
 
       <Route path="/dashbord" element={<UserRoute/>}>
         <Route path="user" element={<Dashbord/>}/>
+        <Route path="user/profile" element={<MyAccount/>}/>
+        <Route path="user/order" element={<MyOrder/>}/>
+        <Route path="user/wishlist" element={<MyWishlist/>}/>
+        <Route path="user/Cart" element={<MyCart/>}/>
       </Route>
 
       <Route path="/dashbord" element={<AdminRoute/>}>
