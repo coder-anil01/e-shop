@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminMenu from './AdminMenu'
 import axios from 'axios';
-import "../../style/Users.css"
 
 const AllUsers = () => {
 
