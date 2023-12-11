@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../style/Register.css'
 import { toast } from "react-toastify";
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,12 +12,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
 
 
   const handleSubmit = async(e)=> {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8000/api/v1/auth/register', {name, email, password, phone, address})
+      const res = await axios.post('http://localhost:8000/api/v1/auth/register', {name, email, password, phone, address, answer})
       if(res.data.success){
         toast.success(res.data.message)
         navigate('/login')
@@ -60,6 +61,14 @@ const Register = () => {
         />
         <input
           type="text"
+          value={answer}
+          onChange={(e)=> setAnswer(e.target.value)}
+          className="form-control"
+          placeholder="Enter Password Hint"
+          required
+        />
+        <input
+          type="text"
           value={phone}
           onChange={(e)=> setPhone(e.target.value)}
           className="form-control"
@@ -75,6 +84,7 @@ const Register = () => {
           required
         />
         <button type="submit" className="form-submit">REGISTER</button>
+        <p className='form-link-m'>Have a account <Link to="/login" className='form-link-s'>Login ?</Link></p>
         </form>
       </div>
   );

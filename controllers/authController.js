@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 //*************  REGISTATION   *************//
 export const registerController = async (req, res) => {
   try {
-    const { name, email, password, address, phone } = req.body;
+    const { name, email, password, address, phone, answer } = req.body;
     //Validation
     if (!name) {
       return res.send({ error: "Name is Required" });
@@ -21,6 +21,9 @@ export const registerController = async (req, res) => {
     }
     if (!address) {
       return res.send({ error: "Address is Required" });
+    }
+    if (!answer) {
+      return res.send({ error: "Hint is Required" });
     }
     //***=> ExistingUser
     const existingUser = await userModel.findOne({ email });
@@ -39,6 +42,7 @@ export const registerController = async (req, res) => {
       address,
       password: hashedPassword,
       phone,
+      answer,
     }).save();
     res.status(201).send({
       success: true,
@@ -113,3 +117,26 @@ export const testController = async (req, res) => {
     message: "Test controller",
   });
 };
+
+
+//*************  FORGOT - PASSWORD   *************//
+export const forgotPasswordController = async (req, res)=> {
+  try {
+    const {email, answer, newPassword} = req.body
+    const user = await userModel.findOne({email, answer})
+    if(!user){
+      return res.status(200).send({message: "Somthing went wrong"})
+    }
+    const hashed = await hashPassword(newPassword);
+    await userModel.findByIdAndUpdate(user._id, {password: hashed})
+    res.status(200).send({
+      success: true,
+      message: "Password Forgot Successfully"
+    })
+  } catch (error) {
+    res.status(404).send({
+      success: false,
+      message: "Internal Server Error"
+    })
+  }
+}

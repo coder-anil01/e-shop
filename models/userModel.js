@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    answer: {
+      type: String,
+      require: true,
+    },
     phone: {
       type: Number,
       require: true,

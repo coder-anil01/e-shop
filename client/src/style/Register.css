@@ -23,7 +23,7 @@
 
 .form-submit {
   background-image: linear-gradient(to right,#1a2980 0%,#26d0ce 51%,#1a2980 100% );
-  margin: 15px 40px;
+  margin: 5px 40px;
   padding: 15px 45px;
   text-align: center;
   transition: 0.5s;
@@ -36,7 +36,19 @@
   font-weight: 550;
   cursor: pointer;
 }
-
+.form-link-s{
+  text-decoration: none;
+  color: #1a2980;
+  font-weight: 550;
+  padding-bottom: 20px;
+}
+.form-link-s:hover{
+  font-style: italic;
+}
+.form-link-m{
+  margin-top: 20px;
+  align-self: center;
+}
 .form-submit:hover {
   background-position: right center;
 }

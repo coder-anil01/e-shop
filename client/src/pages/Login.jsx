@@ -3,7 +3,7 @@ import '../style/Register.css'
 import { toast } from "react-toastify";
 import axios from 'axios'
 import { useAuth } from '../context/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -36,8 +36,6 @@ const Login = () => {
       <div className="form-body">
       <form className="form-group" onSubmit={handleSubmit}>
       <h1 className='form-heading'>Login Page</h1>
-<p>anil@gmail.com</p>
-<p>12345</p>
         <input
           type="email"
           value={email}
@@ -54,8 +52,9 @@ const Login = () => {
           placeholder="Create Password"
           required
         />
-
+        <Link to="/forgot-password" className='form-link-s'>Forgot Password ?</Link>
         <button type="submit" className="form-submit">REGISTER</button>
+        <p className='form-link-m'>Don't have account <Link to="/register" className='form-link-s'>Create Account ?</Link></p>
         </form>
       </div>
   )
