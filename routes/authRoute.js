@@ -1,6 +1,7 @@
 import express from "express";
 import {
   forgotPasswordController,
+  getAllUserController,
   loginController,
   registerController,
   testController,
@@ -21,7 +22,14 @@ router.post("/login", loginController);
 //****** LOGIN *******/
 router.post("/forgot-password", forgotPasswordController);
 
-router.get("/test", requireSignIn, isAdmin, testController);
+
+// //****** Get All User *******/
+// router.get("/get-allusers", requireSignIn, isAdmin, getAllUserController);
+
+//****** Get All User *******/
+router.get("/get-allusers", getAllUserController);
+
+
 
 //user routes
 router.get('/user-auth', requireSignIn, (req, res)=>{

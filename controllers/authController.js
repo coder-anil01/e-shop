@@ -141,3 +141,26 @@ export const forgotPasswordController = async (req, res)=> {
     })
   }
 }
+
+
+//*************  GET ALL USERS   *************//
+export const getAllUserController = async(req, res)=>{
+  try {
+    const role = 0
+    const allUsers = await userModel.find({role})
+    if(!allUsers){
+      return res.status(404).send({message: "Don't have any account"})
+    }
+    res.status(200).send({
+      message: "Get All User",
+      counTotal: allUsers.length,
+      allUsers,
+    })
+  } catch (error) {
+    res.status(404).send({
+      success: false,
+      message: "Internal Server Error",
+      error,
+    })
+  }
+}

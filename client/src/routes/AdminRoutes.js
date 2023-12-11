@@ -12,7 +12,6 @@ const [ok, setOk] = useState(false )
   useEffect(()=>{
     const authCheck = async() =>{
       const res = await axios.get(`http://localhost:8000/api/v1/auth/admin-auth`);
-      console.log(res)
       if(res.data.ok){
         setOk(true)
       }else{
