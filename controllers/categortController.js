@@ -10,7 +10,10 @@ export const createCategoryController = async (req, res)=>{
         }
         const exestingCategory = await categoryModel.findOne({name})
         if(exestingCategory){
-            return res.status(200).send({message: "Category Alredy Exisits"})
+            return res.status(200).send({
+                success:false,
+                message: "Category Alredy Exisits"
+            })
         }
         const category = await new categoryModel({name}).save();
         res.status(201).send({
@@ -51,6 +54,14 @@ export const updateCategoryController = async (req, res) => {
     try {
         const {id} = req.params
         const {name} = req.body
+        
+        const exestingCategory = await categoryModel.findOne({name})
+        if(exestingCategory){
+            return res.status(200).send({
+                success:false,
+                message: "Category Alredy Exisits"
+            })
+        }
         const updateCategory = await categoryModel.findByIdAndUpdate(id, {name}, {new: true})
         res.status(200).send({
             success: true,
@@ -75,13 +86,15 @@ export const deleteCategory = async(req, res) => {
             return res.status(404).send({error: "category not found"})
         }
         res.status(200).send({
-            menubar: "Category Deleted",
+            success: true,
+            message: "Category Deleted Successfully",
             category,
         })
     } catch (error) {
         res.status(500).send({
             success: false,
             message: "Internal server error",
+            error,
         })
     }
 }
