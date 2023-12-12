@@ -28,11 +28,13 @@ const Products = () => {
           <div className='dashbord-menu'><AdminMenu/></div>
           <div className='dashbord-product'>
           <h2>Total products :-- {total} </h2>
+          
           <div className="dashbord-product-item">
           {Array.isArray(data) && data.length > 0 ? (
             data.map((item, index) => (
               <div className='dashbord-product-card' key={index}>
                   <img className='product-image-a' src={item.image} alt={item.title} />
+                  <div className='product-price-a product-title-a'>₹ {item.price}</div>
                   <div className='product-title-a'>{item.title}</div>
                 </div>
               ))
