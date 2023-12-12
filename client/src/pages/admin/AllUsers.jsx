@@ -24,7 +24,7 @@ const AllUsers = () => {
         <div className='dashbord'>
           <div className='dashbord-menu'><AdminMenu/></div>
           <div className='dashbord-contant'>
-            <h2>All Users :-- {total} </h2>
+            <h2 className='dashbord-main-heading'>All Users :-- {total} </h2>
             <div className="user-container-h">
               <div>NAME</div>
               <div>EMAIL</div>

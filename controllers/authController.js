@@ -164,3 +164,25 @@ export const getAllUserController = async(req, res)=>{
     })
   }
 }
+
+//*************  GET ALL ADMIN   *************//
+export const getAllAdminController = async(req, res)=>{
+  try {
+    const role = 8987
+    const allAdmin = await userModel.find({role})
+    if(!allAdmin){
+      return res.status(404).send({message: "Don't have any account"})
+    }
+    res.status(200).send({
+      message: "Get All User",
+      countTotal: allAdmin.length,
+      allAdmin,
+    })
+  } catch (error) {
+    res.status(404).send({
+      success: false,
+      message: "Internal Server Error",
+      error,
+    })
+  }
+}

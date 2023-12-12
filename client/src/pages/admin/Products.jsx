@@ -27,7 +27,7 @@ const Products = () => {
         <div className='dashbord'>
           <div className='dashbord-menu'><AdminMenu/></div>
           <div className='dashbord-product'>
-          <h2>Total products :-- {total} </h2>
+          <h2 className='dashbord-main-heading'>Total products :-- {total} </h2>
           
           <div className="dashbord-product-item">
           {Array.isArray(data) && data.length > 0 ? (

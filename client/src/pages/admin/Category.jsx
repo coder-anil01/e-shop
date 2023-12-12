@@ -26,7 +26,7 @@ const Category = () => {
         <div className='dashbord'>
           <div className='dashbord-menu'><AdminMenu/></div>
           <div className='dashbord-contant'>
-          <h2>All categories :-- {total} </h2>
+          <h2 className='dashbord-main-heading'>All categories :-- {total} </h2>
           {Array.isArray(data) && data.length > 0 ? (
               data.map((item, index) => (
                 <div className='user-container' key={index}>
