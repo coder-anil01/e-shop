@@ -81,6 +81,7 @@
 }
 .product-image-a{
     width: 100%;
+    min-height: 80%;
     height: 80%;
     object-fit: contain;
 }

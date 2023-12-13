@@ -99,6 +99,8 @@ const Category = () => {
           </form>
         </div>
 
+        
+
 {/* SHOW ALL CATEGORTY */}
           <h2 className='dashbord-main-heading'>All categories :-- {total} </h2>
           {Array.isArray(data) && data.length > 0 ? (

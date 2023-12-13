@@ -37,7 +37,6 @@ export const getCategoryController = async(req, res) => {
         res.status(200).send({
             success:true,
             message: "All Category",
-            countTotal: categories.length,
             categories,
         })
     } catch (error) {
