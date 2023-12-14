@@ -58,6 +58,7 @@ const UpdateProduct = () => {
     
     const handleDelete = async ()=> {
       try {
+        alert("you want to delete this Product")
         const {data} = await axios.delete(`http://localhost:8000/api/v1/product/delete/${params.id}`)
         toast.success(data.message)
         navigate('/dashbord/admin/products')

@@ -46,9 +46,12 @@ export const getProductController = async (req, res) => {
 export const getSingleProductController = async (req, res) => {
     try {
         const {id} = req.params
+        if(!id){
+            return res.status(404).send({message: "Product Not Found"})
+        }
         const product = await productModel.findById(id)
         if(!product){
-            res.status(200).send({message: "Product Not Found"})
+            return res.status(200).send({message: "Product Not Found"})
         }
         res.status(200).send({
             success: true,
