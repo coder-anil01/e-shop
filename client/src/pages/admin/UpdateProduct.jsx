@@ -49,10 +49,11 @@ const UpdateProduct = () => {
         e.preventDefault();
         try {
         const {data} = await axios.put(`http://localhost:8000/api/v1/product/update/${params.id}`, {title, description, image, category, price, countInStock, rating, numReviews, isFeatured})
-        console.log(data);
         if (data?.success) {
+          toast.success(data.message)
+          navigate('/dashbord/admin/products')
         }  } catch (error) {
-        console.log(error)
+          toast.error("Internal Server error")
         }
     }
     
@@ -63,7 +64,7 @@ const UpdateProduct = () => {
         toast.success(data.message)
         navigate('/dashbord/admin/products')
       } catch (error) {
-        console.log(error)
+        toast.error("Internal Server error")
       }
     }
 

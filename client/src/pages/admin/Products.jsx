@@ -3,6 +3,7 @@ import AdminMenu from './AdminMenu'
 import axios from 'axios';
 import { Select } from "antd";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const { Option } = Select;
 
 
@@ -58,10 +59,13 @@ const handleSubmit =async(e)=>{
   try {
     const {data} = await axios.post("http://localhost:8000/api/v1/product/create", {title, description, image, category, price, countInStock, rating, numReviews, isFeatured})
     if (data?.success) {
-      console.log(data);
+      toast.success(data.message)
       allProducts();
-    }  } catch (error) {
-    console.log(error)
+    }else{
+      toast.error(data.message)
+    }
+  } catch (error) {
+    toast.error("Internal Server error")
   }
 }
 
@@ -82,6 +86,7 @@ const handleSubmit =async(e)=>{
                 size="large"
                 showSearch
                 className="form-select mb-3 w-75"
+                required
                 onChange={(value) => {
                   setCategory(value);
                 }}
@@ -167,7 +172,7 @@ const handleSubmit =async(e)=>{
               <Link to={`/dashbord/admin/product/${item._id}`} className='dashbord-product-card' key={index}>
                   <img className='product-image-a' src={item.image} alt={item.title} />
                   <div className='product-price-a product-title-a'>₹ {item.price}</div>
-                  <div className='product-title-a'>{item.title}</div>
+                  <div className='product-title-a'>{item.title.slice(0, 10)}...</div>
                 </Link>
               ))
               ) : (
