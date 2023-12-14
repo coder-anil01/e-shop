@@ -20,6 +20,7 @@ import AllOrders from './pages/admin/AllOrders';
 import AllUsers from './pages/admin/AllUsers';
 import Category from './pages/admin/Category';
 import Products from './pages/admin/Products';
+import UpdateProduct from './pages/admin/UpdateProduct';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/dashbord/admin/users" element={<AllUsers/>}/>
         <Route path="/dashbord/admin/category" element={<Category/>}/>
         <Route path="/dashbord/admin/products" element={<Products/>}/>
+        <Route path="/dashbord/admin/product/:id" element={<UpdateProduct/>}/>
       </Route>
 
       </Routes>

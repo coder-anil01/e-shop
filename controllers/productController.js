@@ -42,13 +42,34 @@ export const getProductController = async (req, res) => {
         })
     }
 }
+//*************  FETCH   *************//
+export const getSingleProductController = async (req, res) => {
+    try {
+        const {id} = req.params
+        const product = await productModel.findById(id)
+        if(!product){
+            res.status(200).send({message: "Product Not Found"})
+        }
+        res.status(200).send({
+            success: true,
+            message: "Single Product",
+            product,
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message:"Internal server error",
+            error,
+        })
+    }
+}
 
 //*************  UPDATE   *************//
 export const updateProductController = async(req, res)=> {
     try {
         const{ id } = req.params
-        const {title, description, image, category, price, countInStock, rating, numReviews, isFeatured} = req.body
-        const updateProduct = await productModel.findByIdAndUpdate(id, {title, description, image, category, price, countInStock, rating, numReviews, isFeatured},
+        const {title, description, image, price, countInStock, rating, numReviews, isFeatured} = req.body
+        const updateProduct = await productModel.findByIdAndUpdate(id, {title, description, image, price, countInStock, rating, numReviews, isFeatured},
             {new: true})
         res.status(201).send({
             success: true,

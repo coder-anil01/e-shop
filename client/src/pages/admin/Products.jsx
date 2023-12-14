@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminMenu from './AdminMenu'
 import axios from 'axios';
 import { Select } from "antd";
+import { Link } from 'react-router-dom';
 const { Option } = Select;
 
 
@@ -163,11 +164,11 @@ const handleSubmit =async(e)=>{
           <div className="dashbord-product-item">
           {Array.isArray(data) && data.length > 0 ? (
             data.map((item, index) => (
-              <div className='dashbord-product-card' key={index}>
+              <Link to={`/dashbord/admin/product/${item._id}`} className='dashbord-product-card' key={index}>
                   <img className='product-image-a' src={item.image} alt={item.title} />
                   <div className='product-price-a product-title-a'>₹ {item.price}</div>
                   <div className='product-title-a'>{item.title}</div>
-                </div>
+                </Link>
               ))
               ) : (
                 <p>No User Available</p>

@@ -189,3 +189,23 @@
   .create-category-button{
     padding: 10px 30px !important;
   }
+
+  .button-delete{
+    background-image: linear-gradient(to right,red 0%,chocolate 51%,#d026a0 100% );
+    margin: 5px 40px;
+    width: 220px;
+    padding: 15px 45px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: 550;
+    cursor: pointer;
+  }
+  .button-delete:hover{
+    background-position: right center;
+  }
