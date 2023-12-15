@@ -27,7 +27,7 @@ export const productCreateController = async (req, res) => {
 //*************  FETCH   *************//
 export const getProductController = async (req, res) => {
     try {
-        const products = await productModel.find({})
+        const products = await productModel.find({}).populate('category').sort({ createdAt: -1});
         res.status(200).send({
             success: true,
             message: "All Product",
@@ -42,6 +42,7 @@ export const getProductController = async (req, res) => {
         })
     }
 }
+
 //*************  FETCH   *************//
 export const getSingleProductController = async (req, res) => {
     try {
@@ -49,7 +50,7 @@ export const getSingleProductController = async (req, res) => {
         if(!id){
             return res.status(404).send({message: "Product Not Found"})
         }
-        const product = await productModel.findById(id)
+        const product = await productModel.findById(id).populate('category')
         if(!product){
             return res.status(200).send({message: "Product Not Found"})
         }
@@ -101,6 +102,28 @@ export const deleteProductController = async (req, res) => {
             message: "Product Deleted Successfully",
             deleteProduct,
         })
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message: "Internal server error",
+            error,
+        })
+    }
+}
+
+
+export const filterProductConteroller = async(req, res) =>{
+    try {
+        const {checked, radio} = req.body;
+        let args = {};
+        if(checked.length > 0) args.category = checked;
+        if(radio.length) args.price = { $gte: radio[0], $lte: radio[1]};
+        const products = await productModel.find(args);
+        res.status(200).send({
+            success: true,
+            message:"filtered Product",
+            products,
+        });
     } catch (error) {
         res.status(500).send({
             success:false,

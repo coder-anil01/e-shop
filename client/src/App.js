@@ -21,6 +21,7 @@ import AllUsers from './pages/admin/AllUsers';
 import Category from './pages/admin/Category';
 import Products from './pages/admin/Products';
 import UpdateProduct from './pages/admin/UpdateProduct';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
     <ToastContainer />
       <Routes>
       <Route path="/" element={<HomePage />}/>
+      <Route path="/product/:id" element={<ProductDetails />}/>
       <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/forgot-password" element={<ForgotPassword />}/>
