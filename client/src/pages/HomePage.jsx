@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Checkbox, Radio} from 'antd'
 import { Prices } from '../component/Prices';
-import { RiUserFill } from 'react-icons/ri';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);

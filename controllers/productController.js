@@ -155,3 +155,25 @@ export const searchProductController = async(req, res) => {
         })
     }
 }
+
+//*************  SEARCH   *************//
+export const reletedProductController = async(req, res) => {
+    try {
+        const {pid, cid} = req.params;
+        const reletedProduct = await productModel.find({
+            category: cid,
+            _id: {$ne: pid} //note include
+        }).populate("category");
+        res.status(200).send({
+            success: true,
+            total: reletedProduct.length,
+            reletedProduct,
+        })
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message: "Internal server error",
+            error,
+        })
+    }
+}
