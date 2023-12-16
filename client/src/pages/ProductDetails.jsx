@@ -4,13 +4,28 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa6";
+import { useCart } from '../context/Cart';
+import { toast } from 'react-toastify';
 
 
 const ProductDetails = () => {
 
     const params = useParams();
+    const [cart, setCart] = useCart();
     const[product, setProduct] = useState({})
     const[relectedproduct, setReletedproduct] = useState([])
+
+    const handleAddCart = () => {
+      try {
+        setCart([...cart, product]);
+        localStorage.setItem(
+          "cart", JSON.stringify([ ...cart, product])
+        )
+        toast.success("Item added to cart");
+      } catch (error) {
+        toast.error("Somthing Went Wrong")
+      }
+    }
 
 // get Product
 const getSingelProduct = async () => {
@@ -38,15 +53,15 @@ const reletedProduct = async (pid, cid) => {
     }
 };
 useEffect(()=> {
-    getSingelProduct()
-},[])
+    if(params?.id) getSingelProduct()
+},[params?.id])
 
   return (
     <div className='product-details-body'>
       <div className='product-details'>
         <div className='p-d-left'>
             <img className='p-d-thumnail' src={product.image} alt={product.title} />
-            <button className='p-d-add-to-cart'><FaCartPlus /> ADD TO CART</button>
+            <button className='p-d-add-to-cart'onClick={handleAddCart}><FaCartPlus /> ADD TO CART</button>
             <button className='p-d-buy-now'>BUY NOW</button>
         </div>
         <div>
