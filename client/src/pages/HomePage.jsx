@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Checkbox, Radio} from 'antd'
 import { Prices } from '../component/Prices';
+import { RiUserFill } from 'react-icons/ri';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -66,8 +67,6 @@ const HomePage = () => {
 
 
   return (
-
-    
     <>
     <div className='homepage'>
       <div className='homepage-left'>
@@ -94,8 +93,6 @@ const HomePage = () => {
         </div>
       </div>
       <div className='homepage-right'>
-        {JSON.stringify(checked, null,4)}
-        {JSON.stringify(radio, null,4)}
         {products.map((p)=>(
           <Link to={`/product/${p._id}`} className='h-product-card' key={p._id}>
             <img className='h-Product-image' src={p.image} alt={p.title} />

@@ -3,6 +3,7 @@ import Navlogo from '../image/coder-anil-nav.png'
 import {NavLink, Link, useNavigate} from 'react-router-dom'
 import { useAuth } from '../context/auth'
 import { toast } from "react-toastify";
+import SearchInput from './SearchInput';
 
 const Navbar = () => {
 
@@ -31,6 +32,7 @@ const Navbar = () => {
             <img className='navbar-logo' src={Navlogo} alt="nav-logo" />
         </Link>
         <div className='navbar-items'>
+          <SearchInput/>
             
             {!auth?.user ? (<>
               <NavLink to='/register' className='navbar-item'>

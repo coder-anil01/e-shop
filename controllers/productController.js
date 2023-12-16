@@ -111,7 +111,7 @@ export const deleteProductController = async (req, res) => {
     }
 }
 
-
+//*************  FILTER   *************//
 export const filterProductConteroller = async(req, res) =>{
     try {
         const {checked, radio} = req.body;
@@ -125,6 +125,29 @@ export const filterProductConteroller = async(req, res) =>{
             products,
         });
     } catch (error) {
+        res.status(500).send({
+            success:false,
+            message: "Internal server error",
+            error,
+        })
+    }
+}
+
+//*************  SEARCH   *************//
+export const searchProductController = async(req, res) => {
+    try {
+        const {keyword} = req.params;
+        const products = await productModel.find({
+            $or:[
+                {title: {$regex: keyword, $options: "i"}},
+                {description: {$regex: keyword, $options: "i"}}
+            ]
+        });
+        res.status(200).send({
+            success: true,
+            total: products.length,
+            products,
+        });    } catch (error) {
         res.status(500).send({
             success:false,
             message: "Internal server error",
