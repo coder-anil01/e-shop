@@ -87,19 +87,11 @@ export const loginController = async (req, res) => {
       });
     }
     //***=> Token
-    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET );
     res.status(200).send({
       success: true,
       message: "Login Successfully",
-      user: {
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-        address: user.address,
-        role: user.role,
-      },
+      user,
       token,
     });
   } catch (error) {
@@ -177,6 +169,43 @@ export const getAllAdminController = async(req, res)=>{
       message: "Get All User",
       countTotal: allAdmin.length,
       allAdmin,
+    })
+  } catch (error) {
+    res.status(404).send({
+      success: false,
+      message: "Internal Server Error",
+      error,
+    })
+  }
+}
+
+//*************  UPDATE PROFILE   *************//
+export const updateProfileController = async(req, res) => {
+  try {
+    const {id} = req.params;
+    const {name, email, password, phone, address, answer} = req.body;
+
+    const existingUser = await userModel.findOne({ _id: id, password: password })
+    if(!existingUser){
+      return res.status(200).send({message: "User Does Not Exist"})
+    }
+
+    const user = await userModel.findByIdAndUpdate(id, {
+      name: name || user.name,
+      email: email || user.email,
+      phone : phone || user.phone,
+      address : address || user.address,
+      answer: answer || user.answer,
+    },{new: true})
+
+    //***=> Token
+    const token = await JWT.sign({ _id: id }, process.env.JWT_SECRET );
+
+    res.status(200).send({
+      success: true,
+      message:"Profile Updated Successfully",
+      user,
+      token,
     })
   } catch (error) {
     res.status(404).send({

@@ -1,5 +1,5 @@
 import './App.css';
-import { ToastContainer } from 'react-toastify';
+import { Flip, Slide, ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './component/Navbar';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,13 +24,18 @@ import UpdateProduct from './pages/admin/UpdateProduct';
 import ProductDetails from './pages/ProductDetails';
 import Search from './pages/Search';
 import CartPage from './pages/CartPage';
+import Logout from './userDashbord/Logout';
 
 function App() {
   return (
     < >
     <Router>
     <Navbar/>
-    <ToastContainer />
+    <ToastContainer
+    position='sticky'
+    autoClose={3000}
+    transition={Flip}
+    />
       <Routes>
       <Route path="/" element={<HomePage />}/>
       <Route path="/search" element={<Search />}/>
@@ -46,6 +51,7 @@ function App() {
         <Route path="user/order" element={<MyOrder/>}/>
         <Route path="user/wishlist" element={<MyWishlist/>}/>
         <Route path="user/Cart" element={<MyCart/>}/>
+        <Route path="user/logout" element={<Logout/>}/>
       </Route>
 
       <Route path="/dashbord" element={<AdminRoute/>}>

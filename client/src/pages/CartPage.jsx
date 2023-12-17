@@ -3,6 +3,7 @@ import '../style/Cart.css'
 import { useCart } from '../context/Cart';
 import {Link} from 'react-router-dom'
 import { useAuth } from '../context/auth';
+import { toast } from 'react-toastify';
 
 const CartPage = () => {
   const[cart, setCart] = useCart();
@@ -15,6 +16,7 @@ const CartPage = () => {
         myCart.splice(index, 1);
         setCart(myCart);
         localStorage.setItem("cart", JSON.stringify(myCart));
+        toast.info("Item Removed In Cart")
     } catch (error) {
         console.log(error)
     }

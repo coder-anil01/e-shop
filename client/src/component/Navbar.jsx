@@ -49,10 +49,7 @@ const Navbar = () => {
             <NavLink to='/login' className='navbar-item'>
                 Login
             </NavLink>
-            </>) : (<>
-              <div onClick={handleLogout} className='navbar-item' style={{cursor:"pointer"}}>
-                Logout
-            </div></>)}
+            </>) : ""}
             <NavLink to={`/dashbord/${auth?.user?.role === 8987 ? "admin" : "user"}`} className='navbar-item'>{auth?.user?.name}</NavLink>
         </div>
       </div>

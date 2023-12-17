@@ -6,6 +6,7 @@ import {
   loginController,
   registerController,
   testController,
+  updateProfileController,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 
@@ -32,6 +33,9 @@ router.get("/get-allusers", getAllUserController);
 
 //****** Get All User *******/
 router.get("/get-alladmin", getAllAdminController);
+
+//****** Get All User *******/
+router.put("/updated/:id", updateProfileController);
 
 
 
