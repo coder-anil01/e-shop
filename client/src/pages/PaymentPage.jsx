@@ -1,30 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../style/Cart.css'
 import { useCart } from '../context/Cart';
 import {Link, useNavigate} from 'react-router-dom'
 import { useAuth } from '../context/auth';
 import { toast } from 'react-toastify';
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
+import { Radio} from 'antd'
 
 
-const CartPage = () => {
+const PaymentPage = () => {
+
+  const [value, setValue] = useState(1);
   const[cart, setCart] = useCart();
   const[auth] = useAuth();
   const navigate = useNavigate();
   const user = auth?.user;
-
-  const removeCartItem =(cid)=> {
-    try {
-        let myCart = [...cart];
-        let index = myCart.findIndex((item)=> item._id === cid);
-        myCart.splice(index, 1);
-        setCart(myCart);
-        localStorage.setItem("cart", JSON.stringify(myCart));
-        toast.info("Item Removed In Cart")
-    } catch (error) {
-        console.log(error)
-    }
-  }
 
   const totalPrice =()=> {
     try {
@@ -45,6 +35,11 @@ const CartPage = () => {
       toast.error("Internal Server")
     }
   }
+
+  const onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
   
   return (
     <div className='cart'>
@@ -58,25 +53,16 @@ const CartPage = () => {
           <Link className='cart-mid-button' to="/dashbord/user/profile">Change</Link>
         </div>
 
-        <div className='cart-delivery-adderss'>
-            {cart?.length > 0  ? `${cart?.length} Item In Cart ${auth?.token ? "" : "Plese Login To CheckOut"} ` : "Card Is Empty"}
-        </div>
         <div className="cart-product-item">
-            {cart.map((c)=> (
-              <div className='cart-product-item-card' key={c._id}>
-                <div className='cart-product-item-left'>
-                  <Link to={`/product/${c._id}`}>
-                    <img className='cart-p-image' src={c.image} alt={c.title} />
-                  </Link>
-                </div>
-                <div className='cart-product-item-right'>
-                  <div className='cart-p-title'>{c.title.slice(0, 30)}...</div>
-                  <p className='cart-p-price'>₹ {c.price}</p>
-                  <div className='cart-mid-button' onClick={()=> removeCartItem(c._id)}>remove</div>
-                </div>
-              </div>
-            ))}
+            <h2>Payment Method</h2>
+                <Radio.Group onChange={onChange} value={value} className='payment-method-item'>
+                    <div><Radio value={1}>UPI</Radio></div>
+                    <div><Radio value={2}>CARD</Radio></div>
+                    <div><Radio value={3}>Net Banking</Radio></div>
+                    <div><Radio value={4}>Cash On Delivery</Radio></div>
+                </Radio.Group>
         </div>
+        <button onClick={placeOrder} className='cart-place-order order-conform'>Conform Order</button>
       </div>
       <div>
       <div className='cart-price'>
@@ -87,10 +73,9 @@ const CartPage = () => {
           <h3>₹ {totalPrice()}</h3>
         </div>
       </div>
-        <button onClick={placeOrder} className='cart-place-order'>Place Order</button>
       </div>
     </div>
   )
 }
 
-export default CartPage
+export default PaymentPage

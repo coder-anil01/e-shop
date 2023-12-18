@@ -25,6 +25,7 @@ import ProductDetails from './pages/ProductDetails';
 import Search from './pages/Search';
 import CartPage from './pages/CartPage';
 import Logout from './userDashbord/Logout';
+import PaymentPage from './pages/PaymentPage';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="user/order" element={<MyOrder/>}/>
         <Route path="user/wishlist" element={<MyWishlist/>}/>
         <Route path="user/Cart" element={<MyCart/>}/>
+        <Route path="user/payment" element={<PaymentPage/>}/>
         <Route path="user/logout" element={<Logout/>}/>
       </Route>
 
