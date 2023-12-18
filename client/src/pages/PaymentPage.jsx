@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../style/Cart.css'
 import { useCart } from '../context/Cart';
 import {Link, useNavigate} from 'react-router-dom'
@@ -6,12 +6,14 @@ import { useAuth } from '../context/auth';
 import { toast } from 'react-toastify';
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
 import { Radio} from 'antd'
+import axios from 'axios';
 
 
 const PaymentPage = () => {
 
   const [value, setValue] = useState(1);
   const[cart, setCart] = useCart();
+  const[total, setTotal] = useState(0);
   const[auth] = useAuth();
   const navigate = useNavigate();
   const user = auth?.user;
@@ -22,15 +24,19 @@ const PaymentPage = () => {
       cart?.map((e)=>{
         total = total + e.price;
       });
-      return total
+      setTotal(total)
     } catch (error) {
       console.log(error)
     }
   }
+  useEffect(()=>{
+    totalPrice()
+  },[])
 
-  const placeOrder = ()=> {
+  const placeOrder = async()=> {
     try {
-      navigate('/dashbord/user/payment')
+      const {data} = await axios.post('http://localhost:8000/api/v1/order/create', {cart, user, price: total })
+      navigate("/dashbord/user/order")
     } catch (error) {
       toast.error("Internal Server")
     }
@@ -70,7 +76,7 @@ const PaymentPage = () => {
         <p><strong>Total | Checkout | Payment</strong></p>
         <div className='cart-delivery-adderss'>
           <div><h3>Total Amount:-</h3></div>
-          <h3>₹ {totalPrice()}</h3>
+          <h3>₹ {total}</h3>
         </div>
       </div>
       </div>
