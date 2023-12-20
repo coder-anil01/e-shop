@@ -19,7 +19,6 @@ const PaymentPage = () => {
   const user = auth?.user;
 
   const totalPrice =()=> {
-    console.log(cart)
     try {
       let total = 0;
       cart?.map((e)=>{
@@ -37,9 +36,11 @@ const PaymentPage = () => {
   const placeOrder = async()=> {
     try {
       const {data} = await axios.post('http://localhost:8000/api/v1/order/create', {cart, id: user._id, price: total })
-      localStorage.removeItem("cart")
-      setCart([])
-      navigate("/dashbord/user/order")
+      if(data.success){
+        localStorage.removeItem("cart")
+        setCart([])
+        navigate("/dashbord/user/order")
+      }
     } catch (error) {
       toast.error("Internal Server")
     }

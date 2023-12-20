@@ -2,13 +2,14 @@ import orderModel from "../models/orderModel.js";
 
 //*************  CREATE   *************//
 export const createOrder = async(req, res) => {
+    const {cart, price, id} = req.body;
     try {
-        const {cart, price, id} = req.body;
-        const order = await new orderModel({products: cart, price, user: id }).save();
+        for (let i = 0; i < cart.length; i++) {
+            await new orderModel({products: cart[i], price: cart[i]?.price, user: id }).save();
+        }
         res.status(201).send({
             success: true,
             message: "congratulations Order Conform",
-            order,
         })
     } catch (error) {
         res.status(500).send({
@@ -44,7 +45,7 @@ export const userAllOrders = async(req, res)=>{
         if(!id){
             return res.status(404).send("plese enter user id")
         }
-        const orders = await orderModel.findOne({user: id}).populate("products").sort({ createdAt: -1});
+        const orders = await orderModel.find({user: id}).populate("products").sort({ createdAt: -1});
         res.status(200).send({
             success: true,
             message: "User All Order",
