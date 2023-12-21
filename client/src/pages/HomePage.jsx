@@ -4,12 +4,29 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Checkbox, Radio} from 'antd'
 import { Prices } from '../component/Prices';
+import { useAuth } from '../context/auth';
+import { toast } from 'react-toastify';
+import { FaRegHeart } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const[auth] = useAuth();
+
+  //wishList Add
+  const addWishlist = async(id) => {
+    try {
+      const {data} = await axios.post('http://localhost:8000/api/v1/wishlist/create', {user: auth?.user?._id, product: id})
+      if(data?.success){
+        toast.success(data?.message)
+      }
+    } catch (error) {
+      toast.error("Internal Server Error")
+    }
+  }
 
   //=> fetch categort
   const allCategory =async()=>{
@@ -93,14 +110,20 @@ const HomePage = () => {
       </div>
       <div className='homepage-right'>
         {products.map((p)=>(
-          <Link to={`/product/${p._id}`} className='h-product-card' key={p._id}>
-            <img className='h-Product-image' src={p.image} alt={p.title.slice(0, 5)} />
+          <div className='h-product-card' key={p._id}>
+            <Link to={`/product/${p._id}`}>
+              <img className='h-Product-image' src={p.image} alt={p.title.slice(0, 5)} />
+            </Link>
             <div className='h-product-text'>
+              <div className='product-wish-cart'>
+                <div onClick={()=> {addWishlist(p._id)}}><FaRegHeart/></div>
+                <div><FaCartPlus/></div>
+                </div>
               <div className='h-product-ttle' >{p.title.slice(0,15)}...</div>
               <div className='h-product-price' >₹ {p.price}/-</div>
               <div className='h-product-delivery' >Free Delivery</div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

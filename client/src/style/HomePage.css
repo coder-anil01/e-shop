@@ -22,13 +22,14 @@
     min-height: 70%;
     object-fit: contain;
 }
-.h-product-cart{
-    position: relative;
-    bottom: 80px;
-    float: right;
+.product-wish-cart{
+    display: flex;
+    justify-content: space-between;
+}
+.product-wish-cart div{
+    margin: 0 20px;
     font-size: 20px;
-    padding: 20px;
-    color: #ff9f00;
+    cursor: pointer;
 }
 .h-product-text{
     padding: 10px;
