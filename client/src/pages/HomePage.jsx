@@ -94,7 +94,7 @@ const HomePage = () => {
       <div className='homepage-right'>
         {products.map((p)=>(
           <Link to={`/product/${p._id}`} className='h-product-card' key={p._id}>
-            <img className='h-Product-image' src={p.image} alt={p.title} />
+            <img className='h-Product-image' src={p.image} alt={p.title.slice(0, 5)} />
             <div className='h-product-text'>
               <div className='h-product-ttle' >{p.title.slice(0,15)}...</div>
               <div className='h-product-price' >₹ {p.price}/-</div>

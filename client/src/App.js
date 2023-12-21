@@ -26,6 +26,7 @@ import Search from './pages/Search';
 import CartPage from './pages/CartPage';
 import Logout from './userDashbord/Logout';
 import PaymentPage from './pages/PaymentPage';
+import AdminLogout from './pages/admin/AdminLogout';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="/dashbord/admin/category" element={<Category/>}/>
         <Route path="/dashbord/admin/products" element={<Products/>}/>
         <Route path="/dashbord/admin/product/:id" element={<UpdateProduct/>}/>
+        <Route path="/dashbord/admin/adminlogout" element={<AdminLogout/>}/>
       </Route>
 
       </Routes>

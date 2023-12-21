@@ -1,5 +1,5 @@
 import express from "express";
-import { createOrder, getAllOrder, userAllOrders } from "../controllers/orderController.js";
+import { createOrder, getAllOrder, updateStaus, userAllOrders } from "../controllers/orderController.js";
 
 
 
@@ -12,5 +12,6 @@ router.get("/get-all", getAllOrder)
 
 router.post("/user-order", userAllOrders)
 
+router.put("/update/:id", updateStaus)
 
 export default router;

@@ -14,6 +14,10 @@ const orderSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',
             // require: true,
+        },
+        status:{
+            type:String,
+            default: "Processing",
         }
         
     },{timestamps: true}

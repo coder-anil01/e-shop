@@ -3,6 +3,8 @@ import UserMenu from './UserMenu'
 import { useAuth } from '../context/auth'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from "moment";
+
 
 const MyOrder = () => {
 
@@ -40,6 +42,8 @@ const MyOrder = () => {
                 <div className='cart-product-item-right'>
                   <div className='cart-p-title'>{c.products.title}...</div>
                   <p className='cart-p-price'>₹ {c.price}</p>
+                  <div className='cart-p-title'>{c.status}</div>
+                  <p>{moment(c.createdAt).fromNow()}</p>
                 </div>
               </div>
             ))}

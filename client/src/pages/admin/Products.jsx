@@ -81,7 +81,7 @@ const handleSubmit =async(e)=>{
       <form className="form-group" onSubmit={handleSubmit}>
         <h1 className='form-heading'>Create Product</h1>
           <Select
-                bordered={false}
+                // bordered={false}
                 placeholder="Select a category"
                 size="large"
                 showSearch

@@ -8,8 +8,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "cd client && npm start" 
   },
   "author": "",
   "license": "ISC",
@@ -22,5 +23,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

@@ -23,10 +23,11 @@ export const createOrder = async(req, res) => {
 //*************  GET   *************//
 export const getAllOrder = async(req, res) => {
     try {
-        const order = await orderModel.find({})
+        const order = await orderModel.find({}).populate("products").populate("user").sort({ createdAt: -1});
         res.status(201).send({
             success: true,
             message: "All Orders",
+            total: order.length,
             order,
         })
     } catch (error) {
@@ -51,6 +52,26 @@ export const userAllOrders = async(req, res)=>{
             message: "User All Order",
             totalOrders: orders.length,
             orders,
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "Error While Registation",
+            error,
+          });
+    }
+}
+
+//*************  Update   *************//
+export const updateStaus = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {status} = req.body;
+        const update = await orderModel.findByIdAndUpdate(id, {status},{new: true})
+        res.status(200).send({
+            success: true,
+            message: "Order Status Updated",
+            update,
         })
     } catch (error) {
         res.status(500).send({
