@@ -3,7 +3,7 @@ import UserMenu from './UserMenu'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/auth';
-import { FaCartPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { MdDeleteForever } from "react-icons/md";
 
 
@@ -21,6 +21,20 @@ const MyWishlist = () => {
   useEffect(()=>{
     wishlist();
   },[])
+
+  //handleDeleteWishlist
+  const handleDeleteWishlist =async(id)=>{
+    try {
+      const {data} = await axios.delete(`http://localhost:8000/api/v1/wishlist/delete/${id}`)
+      if(data.success){
+        wishlist();
+        toast.info(data.message)
+      }
+      console.log(data)
+    } catch (error) {
+      toast.error("Internal Server Error")
+    }
+  }
   return (
     <>
     <div className='menu-h1'>My Dashbord</div>
@@ -30,12 +44,12 @@ const MyWishlist = () => {
         <div className='dashbord-contant'>
         <div className='homepage-right'>
         {products.map((p)=>(
-          <div className='h-product-card' key={p.product_id}>
+          <div className='h-product-card' key={p._id}>
             <Link to={`/product/${p.product_id}`}>
               <img className='h-Product-image' src={p.product.image} alt={p.product.title.slice(0, 5)} />
             </Link>
             <div className='h-product-text'>
-              <div><FaCartPlus/> <MdDeleteForever/></div>
+              <div onClick={()=> {handleDeleteWishlist(p._id)}}><MdDeleteForever/></div>
               <div className='h-product-ttle' >{p.product.title.slice(0,15)}...</div>
               <div className='h-product-price' >₹ {p.product.price}/-</div>
               <div className='h-product-delivery' >Free Delivery</div>

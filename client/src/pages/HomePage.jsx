@@ -8,6 +8,7 @@ import { useAuth } from '../context/auth';
 import { toast } from 'react-toastify';
 import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa";
+import Whatshapp from '../component/Whatshapp';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -22,6 +23,8 @@ const HomePage = () => {
       const {data} = await axios.post('http://localhost:8000/api/v1/wishlist/create', {user: auth?.user?._id, product: id})
       if(data?.success){
         toast.success(data?.message)
+      }else{
+        toast.warning(data.message)
       }
     } catch (error) {
       toast.error("Internal Server Error")
@@ -126,6 +129,7 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+      <Whatshapp/>
     </div>
     </>
   )

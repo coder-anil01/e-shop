@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axios from 'axios'
 import { useAuth } from '../context/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Whatshapp from '../component/Whatshapp';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,6 +57,7 @@ const Login = () => {
         <button type="submit" className="form-submit">REGISTER</button>
         <p className='form-link-m'>Don't have account <Link to="/register" className='form-link-s'>Create Account ?</Link></p>
         </form>
+        <Whatshapp/>
       </div>
   )
 }

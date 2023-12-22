@@ -4,6 +4,7 @@ import { useAuth } from '../context/auth'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from "moment";
+import Whatshapp from '../component/Whatshapp';
 
 
 const MyOrder = () => {
@@ -31,7 +32,7 @@ const MyOrder = () => {
           <div className='dashbord-menu'><UserMenu/></div>
           <div className='dashbord-contant'>
           <h2>All Orders {orders.length}</h2>
-        <div className="cart-product-item">
+          <div className="cart-product-item">
             {orders.map((c)=> (
               <div className='cart-product-item-card' key={c.products._id}>
                 <div className='cart-product-item-left'>
@@ -47,11 +48,11 @@ const MyOrder = () => {
                 </div>
               </div>
             ))}
-        </div>
-
+          </div>
           </div>
         </div>
       </div>
+      <Whatshapp/>
     </>
   )
 }
